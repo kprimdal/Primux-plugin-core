@@ -93,3 +93,17 @@ function better_except($post, $length = 10, $tags = '<a><em><strong>', $extra = 
  
 	return apply_filters('the_content', $the_excerpt);
 }
+
+/**
+ * Change the Query, to maybe show more or less post per pages.
+ */
+	function mux_edit_query( $query ) {
+	    if ( is_post_type_archive('photographer') ){
+	        $query->query_vars['posts_per_page'] = 99999;
+	        $query->query_vars['orderby'] = 'title';
+	        $query->query_vars['order'] = 'ASC';
+	        return;
+	    }
+	}
+
+// add_action('pre_get_posts', 'mux_edit_query', 1); // 
